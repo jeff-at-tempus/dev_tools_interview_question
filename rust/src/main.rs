@@ -8,7 +8,7 @@ fn main() {
     //TODO Lastly, move these functions outside of main.rs so we can reuse and test them.
 }
 
-//TODO println! and eprintln! should happen in main()
+//TODO println! or eprintln! should happen in main()
 fn ping() {
     let is_ok = is_successful();
     if is_ok {
@@ -19,7 +19,7 @@ fn ping() {
     }
 }
 
-//TODO println! and eprintln! should happen in main()
+//TODO println! or eprintln! should happen in main()
 fn echo(m: &str) {
     let is_ok = is_successful();
     if is_ok {
@@ -30,7 +30,7 @@ fn echo(m: &str) {
     }
 }
 
-//TODO println! and eprintln! should happen in main()
+//TODO println! or eprintln! should happen in main()
 fn job_count() {
     let exists = is_successful();
     if exists {
@@ -43,8 +43,7 @@ fn job_count() {
 /// Just a dummy function to simulate unexpected behavior.
 /// `cargo run -- --skip` to always run happy path.
 fn is_successful() -> bool {
-    let args: Vec<String> = std::env::args().collect();
-    if args.len() > 1 && args[1] == "--skip" {
+    if std::env::args().any(|x| x == *"--skip") {
         return true;
     }
     rand::random::<bool>()
