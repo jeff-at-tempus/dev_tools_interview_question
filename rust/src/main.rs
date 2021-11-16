@@ -1,5 +1,6 @@
+//TODO Adhere to writing clean, idiomatic Rust code.
 fn main() {
-    //TODO If ping() is down, don't call echo().
+    //TODO If ping() is down, log an error and don't call echo().
     ping();
     //TODO Handle and log errors from echo() inside main() and continue.
     echo("Hello, world!");
@@ -10,7 +11,7 @@ fn main() {
 
 //TODO println! or eprintln! should happen in main()
 fn ping() {
-    let is_ok = is_successful();
+    let is_ok = random_bool();
     if is_ok {
         println!("UP");
     } else {
@@ -21,7 +22,7 @@ fn ping() {
 
 //TODO println! or eprintln! should happen in main()
 fn echo(m: &str) {
-    let is_ok = is_successful();
+    let is_ok = random_bool();
     if is_ok {
         println!("{}", m);
     } else {
@@ -32,17 +33,17 @@ fn echo(m: &str) {
 
 //TODO println! or eprintln! should happen in main()
 fn job_count() {
-    let exists = is_successful();
-    if exists {
+    let jobs_exist = random_bool();
+    if jobs_exist {
         println!("{}", rand::random::<u8>());
     } else {
-        println!("none");
+        println!("None");
     }
 }
 
 /// Just a dummy function to simulate unexpected behavior.
 /// `cargo run -- --skip` to always run happy path.
-fn is_successful() -> bool {
+fn random_bool() -> bool {
     if std::env::args().any(|x| x == *"--skip") {
         return true;
     }
